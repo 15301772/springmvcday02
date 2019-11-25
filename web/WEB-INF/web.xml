@@ -5,7 +5,7 @@
          version="4.0">
 
     <welcome-file-list>
-        <welcome-file>/page/layuipage/login.html</welcome-file>
+        <welcome-file>/page/layuipage/Layui.html</welcome-file>
     </welcome-file-list>
 
 
@@ -27,7 +27,6 @@
             <param-value>classpath:springmvc.xml</param-value>
         </init-param>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.action</url-pattern>

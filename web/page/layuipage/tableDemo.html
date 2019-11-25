@@ -14,8 +14,69 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+<script type="text/html" id="updatepage">
+    <form class="layui-form" lay-filter="update-form">
+        <div class="layui-input-block ">
+            <input type="hidden" name="user_id" id="id" required lay-verify="required">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block ">
+                <input type="text" name="user_name"
+                       id="name" required lay-verify="required" class="layui-input" style="width: 200px"
+                       placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-block ">
+                <input type="text" name="user_age" class="layui-input" style="width: 200px"
+                       id="age" required lay-verify="required" placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">专业</label>
+            <div class="layui-input-block ">
+                <input type="text" name="user_major" class="layui-input" style="width: 200px"
+                       id="major" required lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-block ">
+                <input type="text" name="address" class="layui-input" style="width: 200px"
+                       id="address" required lay-verify="required" placeholder="地址">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top:40px">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-submit " lay-submit="" lay-filter="update-submit_btn">确认修改</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</script>
+<script type="text/html" id="detailForm">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名:</label>
+        <label class="layui-form-label" id="dname"/>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">年龄</label>
+        <label class="layui-form-label" id="dage"/>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">专业</label>
+        <label class="layui-form-label" id="dmajor"/>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码框</label>
+        <label class="layui-form-label" id="dpassword"/>
+    </div>
+</script>
+
 <script>
-    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function () {
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider', 'jquery'], function () {
         var laydate = layui.laydate //日期
             , laypage = layui.laypage //分页
             , layer = layui.layer //弹层
@@ -24,12 +85,13 @@
             , upload = layui.upload //上传
             , element = layui.element //元素操作
             , slider = layui.slider //滑块
+            , $ = layui.$;
 //向世界问个好
         layer.msg('Hello World');
 
         //监听Tab切换
-        element.on('tab(demo)', function(data){
-            layer.tips('切换了 '+ data.index +'：'+ this.innerHTML, this, {
+        element.on('tab(demo)', function (data) {
+            layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
                 tips: 1
             });
         });
@@ -85,14 +147,49 @@
                 , layEvent = obj.event; //获得 lay-event 对应的值
             if (layEvent === 'detail') {
                 layer.msg('查看操作');
-            } else if (layEvent === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del(); //删除对应行（tr）的DOM结构
-                    layer.close(index);
-                    //向服务端发送删除指令
+            } else if (obj.event === 'del') {
+                //弹出即全屏
+                var index = layer.open({
+                    type: 1,
+                    content: $('#detailForm').html(),
+                    maxmin: true
                 });
+                layer.full(index);
+                console.log(data.name);
+                $("#dname").html(data.name);
+                $("#dage").html(data.age);
+                $("#dmajor").html(data.major);
+                $("#dpassword").html(data.password)
             } else if (layEvent === 'edit') {
-                layer.msg('编辑操作');
+                layer.open({ //打开页面
+                    title: "编辑用户",
+                    type: 1,
+                    content: $('#updatepage').html(),
+                    area: ['700px', '400px'],
+                    closeBtn: 2,
+                    skin: 'layui-layer-rim', //加上边框
+                })
+                form.val('update-form', { //填充数据
+                    user_id: obj.data.user_id, //这里必须用input name属性
+                    user_name: obj.data.user_name,
+                    user_age: obj.data.user_age,
+                    user_major: obj.data.user_major,
+                    user_password: obj.data.user_password,
+                    address: obj.data.address
+                })
+                form.on('submit(update-submit_btn)', function (data) {
+                    console.log(data);
+                    $.post('/updateUserInfo', data.field, function (flag) {
+                        if (flag == 1) {
+                            layer.msg("修改成功", {icon: 6});
+                            layer.closeAll();
+                            table.reload('testReload', {});//修改后返回列表页面进行刷新
+                        } else {
+                            layer.msg("修改失败", {icon: 6});
+                        }
+                    })
+                    // return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                })
             }
         });
     })
