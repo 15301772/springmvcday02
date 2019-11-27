@@ -126,5 +126,30 @@ public class UserController {
         return returnTable;
     }
 
+    @RequestMapping("/updateUserInfo.action")
+    @ResponseBody
+    public int updateUserInfo(User user) {
+        return userDao.update(user);
+    }
 
+    @RequestMapping("/delete.action")
+    @ResponseBody
+    public int delete(String user_ids){
+        if(user_ids.endsWith(",")){
+            user_ids= user_ids.substring(0,user_ids.length()-1);
+        }
+        String[] split = user_ids.split(",");
+        int i=0;
+        for (String s:split) {
+            int i1 = userDao.delete(Integer.parseInt(s));
+            i=i+i1;
+        }
+        return i;
+    }
+    @RequestMapping("/addUserInfo.action")
+    @ResponseBody
+    public int  addUserInfo(User user){
+        return userDao.addUser(user);
+
+    }
 }

@@ -28,4 +28,8 @@ public interface UserMapper {
 
     public List<User> selectpage(HashMap map);
 
+    public int update (User user);
+    public int delete(Integer user_id);
+    public int addUser(User user);
+
 }

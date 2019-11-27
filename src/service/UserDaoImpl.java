@@ -66,5 +66,14 @@ public class UserDaoImpl implements UserDao {
         return userMapper.selectpage(map);
     }
 
+    @Override
+    public int update(User user) { return userMapper.update(user); }
+
+    @Override
+    public int delete(Integer user_id) { return userMapper.delete(user_id); }
+
+    @Override
+    public int addUser(User user) { return userMapper.addUser(user); }
+
 
 }

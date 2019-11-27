@@ -77,4 +77,15 @@
     <select id="selectpage" parameterType="hashmap" resultMap="usermap">
         SELECT * FROM USER LIMIT #{pagestart},#{size}
     </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into user (name,age,major,address) values(#{user_name},#{user_age},#{user_major},#{address})
+    </insert>
+    <update id="update" parameterType="User">
+        update user set name=#{user_name},age=#{user_age},major=#{user_major},address=#{address} where id=#{user_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from user where id=#{user_id}
+    </delete>
 </mapper>
