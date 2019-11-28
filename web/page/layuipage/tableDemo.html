@@ -7,16 +7,17 @@
     <link rel="stylesheet" href="/springmvcday02/page/layui/css/layui.css" media="all">
 </head>
 <body>
-<div class="demoTable" style="margin-top: 20px">&nbsp; 姓名：
-    <div class="layui-inline">
-        <input class="layui-input" name="id" id="searchName" autocomplete="off">
+    <div class="demoTable" style="margin-top: 20px">&nbsp; 姓名：
+        <div class="layui-inline">
+            <input class="layui-input" name="user_name" id="searchName" autocomplete="off">
+        </div>
+        专业：
+        <div class="layui-inline">
+            <input class="layui-input" name="user_major" id="searchMajor" autocomplete="off">
+        </div>
+        <!--<button class="layui-btn" id="searchBtn" data-type="reload">搜索</button>-->
+        <button class="layui-btn layui-btn-sm" id="btn-search" name="search">搜索</button>
     </div>
-    专业：
-    <div class="layui-inline">
-        <input class="layui-input" name="id" id="searchMajor" autocomplete="off">
-    </div>
-    <button class="layui-btn" id="searchBtn" data-type="reload">搜索</button>
-</div>
 <table id="demo" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
@@ -39,7 +40,8 @@
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block ">
                 <input type="text" name="user_name"
-                       id="name" required lay-verify="required" class="layui-input" style="width: 200px"
+                       id="name" required lay-verify="required" class="layui-input"
+                       style="width: 200px"
                        placeholder="请输入姓名">
             </div>
         </div>
@@ -66,7 +68,9 @@
         </div>
         <div class="layui-form-item" style="margin-top:40px">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-submit " lay-submit="" lay-filter="update-submit_btn">确认修改</button>
+                <button class="layui-btn layui-btn-submit " lay-submit=""
+                        lay-filter="update-submit_btn">确认修改
+                </button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -78,7 +82,8 @@
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block ">
                 <input type="text" name="user_name"
-                       id="addName" required lay-verify="required" class="layui-input" style="width: 200px"
+                       id="addName" required lay-verify="required" class="layui-input"
+                       style="width: 200px"
                        placeholder="请输入姓名">
             </div>
         </div>
@@ -105,7 +110,9 @@
         </div>
         <div class="layui-form-item" style="margin-top:40px">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-submit " lay-submit="" lay-filter="add-submit_btn">确认添加</button>
+                <button class="layui-btn layui-btn-submit " lay-submit=""
+                        lay-filter="add-submit_btn">确认添加
+                </button>
             </div>
         </div>
     </form>
@@ -153,11 +160,11 @@
 //第一个实例 render  渲染
         table.render({
             elem: '#demo',
-            height: 420 ,
+            height: 420,
             url: "/springmvcday02/selectLayUitable_Page.action",
-            toolbar:"#toolbarDemo",
+            toolbar: "#toolbarDemo",
             totalRow: true,//开启合计行
-            id:"testReload",
+            id: "testReload",
             cols: [[
                 {type: 'checkbox', fixed: 'left'},
                 {field: 'user_id', title: 'ID', width: 80, fixed: 'left'}
@@ -296,6 +303,20 @@
                 }
             })
             // return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        })
+        $("#btn-search").on("click",function () {
+            var user_name=$("#searchName").val();
+            var user_major=$("#searchSex").val();
+            tableIns.reload({
+                where: { //设定异步数据接口的额外参数，任意设
+                    user_name: user_name
+                    ,user_major: user_major
+                    //…
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
         })
     })
 </script>

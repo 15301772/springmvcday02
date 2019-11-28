@@ -111,7 +111,6 @@ public class UserController {
         return TooL.testLayui(users, 0, 0);
     }
 
-
     @RequestMapping("selectLayUitable_Page.action")
     @ResponseBody
     public Map<String, Object> selectLayUitable_Page(int page, int limit) {

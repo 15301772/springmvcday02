@@ -71,6 +71,14 @@
 
     <select id="userCount" resultType="integer">
         select count(*) from user
+        <where>
+            <if test="name!=null and name!=''">
+                and name=#{user_name}
+            </if>
+            <if test="major!=null and major!=''">
+                and major=#{user_major}
+            </if>
+        </where>
     </select>
 
 
@@ -78,7 +86,7 @@
         SELECT * FROM USER LIMIT #{pagestart},#{size}
     </select>
 
-    <insert id="addUser" parameterType="User">
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="user_id"  parameterType="User">
         insert into user (name,age,major,address) values(#{user_name},#{user_age},#{user_major},#{address})
     </insert>
     <update id="update" parameterType="User">
