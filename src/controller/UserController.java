@@ -113,16 +113,26 @@ public class UserController {
 
     @RequestMapping("selectLayUitable_Page.action")
     @ResponseBody
-    public Map<String, Object> selectLayUitable_Page(int page, int limit) {
-        HashMap<String, Integer> map = new HashMap<>();
+    public Map<String, Object> selectLayUitable_Page(int page, int limit,User user) {
+        HashMap<String, Object> map = new HashMap<>();
         int pageStart = (page - 1) * limit;
         map.put("pagestart", pageStart);
         map.put("size", limit);
-        List<User> users = userDao.selectpage(map);
+        map.put("user_name",user.getUser_name());
+        map.put("user_major",user.getUser_major());
+        List<User> users = userDao.select(map);
         Integer pagecount = userDao.userCount();
-        Map<String, Object> returnTable = TooL.testLayui(users, page, limit);
-        returnTable.put("count", pagecount);
-        return returnTable;
+//        Map<String, Object> returnTable = TooL.testLayui(users, page, limit);
+//        returnTable.put("count", pagecount);
+//        return returnTable;
+        Map map1=new HashMap();
+        map1.put("code",0);
+        map1.put("msg","");
+        map1.put("count",pagecount);
+        JSONArray data = JSONArray.fromObject(users);
+        map1.put("data",data);
+        return map1;
+
     }
 
     @RequestMapping("/updateUserInfo.action")

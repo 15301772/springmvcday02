@@ -158,7 +158,7 @@
             });
         });
 //第一个实例 render  渲染
-        table.render({
+          var tableIns   = table.render({
             elem: '#demo',
             height: 420,
             url: "/springmvcday02/selectLayUitable_Page.action",
@@ -306,15 +306,14 @@
         })
         $("#btn-search").on("click",function () {
             var user_name=$("#searchName").val();
-            var user_major=$("#searchSex").val();
+            var user_major=$("#searchMajor").val();
             tableIns.reload({
                 where: { //设定异步数据接口的额外参数，任意设
                     user_name: user_name
                     ,user_major: user_major
                     //…
-                }
-                ,page: {
-                    curr: 1 //重新从第 1 页开始
+                },page: {
+                    curr:1 //重新从第 1 页开始
                 }
             });
         })

@@ -86,7 +86,7 @@
         SELECT * FROM USER LIMIT #{pagestart},#{size}
     </select>
 
-    <insert id="addUser" useGeneratedKeys="true" keyProperty="user_id"  parameterType="User">
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="user_id" parameterType="User">
         insert into user (name,age,major,address) values(#{user_name},#{user_age},#{user_major},#{address})
     </insert>
     <update id="update" parameterType="User">
@@ -100,13 +100,13 @@
     <select id="select" parameterType="hashmap" resultMap="usermap">
         select * from user
         <where>
-            <if test="name!=null and name!=''">
+            <if test="user_name!=null and user_name!=''">
                 and name=#{user_name}
             </if>
-            <if test="major!=null and major!=''">
+            <if test="user_major!=null and user_major!=''">
                 and major=#{user_major}
             </if>
         </where>
-        limit #{page},#{size}
+        limit #{pagestart},#{size}
     </select>
 </mapper>
