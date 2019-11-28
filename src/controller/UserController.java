@@ -150,6 +150,5 @@ public class UserController {
     @ResponseBody
     public int  addUserInfo(User user){
         return userDao.addUser(user);
-
     }
 }

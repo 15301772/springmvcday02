@@ -28,5 +28,6 @@ public interface UserDao {
     public int update (User user);
     public int delete(Integer user_id);
     public int addUser(User user);
+    public List<User> select(HashMap map);
 
 }

@@ -62,9 +62,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectpage(HashMap map) {
-        return userMapper.selectpage(map);
-    }
+    public List<User> selectpage(HashMap map) { return userMapper.selectpage(map); }
 
     @Override
     public int update(User user) { return userMapper.update(user); }
@@ -74,6 +72,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int addUser(User user) { return userMapper.addUser(user); }
+
+    @Override
+    public List<User> select(HashMap map) { return userMapper.select(map); }
 
 
 }

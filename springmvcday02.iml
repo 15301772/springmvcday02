@@ -86,7 +86,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/Tools/package/springmvc和mybatis整合/javassist-3.17.1-GA.jar!/" />
+          <root url="jar://E:/Tools/package/springmvc和mybatis整合/log4j-core-2.0-rc1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -131,7 +131,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/Tools/package/springmvc和mybatis整合/log4j-core-2.0-rc1.jar!/" />
+          <root url="jar://E:/Tools/package/springmvc和mybatis整合/javassist-3.17.1-GA.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -88,4 +88,17 @@
     <delete id="delete" parameterType="java.lang.Integer">
         delete from user where id=#{user_id}
     </delete>
+
+    <select id="select" parameterType="hashmap" resultMap="usermap">
+        select * from user
+        <where>
+            <if test="name!=null and name!=''">
+                and name=#{user_name}
+            </if>
+            <if test="major!=null and major!=''">
+                and major=#{user_major}
+            </if>
+        </where>
+        limit #{page},#{size}
+    </select>
 </mapper>
