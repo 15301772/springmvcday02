@@ -383,7 +383,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/Tools/package/Json/json-lib-2.1-jdk13.jar/json-lib-2.1-jdk13.jar!/" />
+          <root url="jar://E:/Tools/package/json/json-lib-2.1-jdk13.jar/json-lib-2.1-jdk13.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -88,12 +88,12 @@
           <element id="file-copy" path="E:/Tools/package/springmvc加入json支持/jackson-annotations-2.4.0.jar" />
           <element id="file-copy" path="E:/Tools/package/springmvc加入json支持/jackson-core-2.4.2.jar" />
           <element id="file-copy" path="E:/Tools/package/springmvc加入json支持/jackson-databind-2.4.2.jar" />
-          <element id="file-copy" path="E:/Tools/package/Json/commons-collections-3.2.1.jar" />
-          <element id="file-copy" path="E:/Tools/package/Json/commons-logging-1.1.1.jar" />
-          <element id="file-copy" path="E:/Tools/package/Json/commons-beanutils-1.9.3.jar" />
-          <element id="file-copy" path="E:/Tools/package/Json/json-lib-2.1-jdk13.jar/json-lib-2.1-jdk13.jar" />
-          <element id="file-copy" path="E:/Tools/package/Json/ezmorph-1.0.6.jar" />
-          <element id="file-copy" path="E:/Tools/package/Json/commons-lang-2.6.jar" />
+          <element id="file-copy" path="E:/Tools/package/json/commons-collections-3.2.1.jar" />
+          <element id="file-copy" path="E:/Tools/package/json/commons-logging-1.1.1.jar" />
+          <element id="file-copy" path="E:/Tools/package/json/commons-beanutils-1.9.3.jar" />
+          <element id="file-copy" path="E:/Tools/package/json/json-lib-2.1-jdk13.jar/json-lib-2.1-jdk13.jar" />
+          <element id="file-copy" path="E:/Tools/package/json/ezmorph-1.0.6.jar" />
+          <element id="file-copy" path="E:/Tools/package/json/commons-lang-2.6.jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="springmvcday02/web/Web" />
